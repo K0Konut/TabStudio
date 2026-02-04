@@ -1,9 +1,2 @@
-@import "daisyui/daisyui.css";
-
-body {
-  min-height: 100vh;
-}
-
-#app {
-  min-height: 100vh;
-}
+@import "tailwindcss";
+@plugin "daisyui";
