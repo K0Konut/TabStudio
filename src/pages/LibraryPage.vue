@@ -1,7 +1,46 @@
 <script setup>
-import { getTabs } from '../services/tabLibrary'
+import { reactive, ref } from 'vue'
+import { getTabs, importTabsFromJsonText } from '../services/tabLibrary'
 
-const tabs = getTabs()
+const tabs = ref(getTabs())
+const importState = reactive({
+  status: 'idle',
+  message: '',
+  errors: [],
+})
+
+async function handleImport(event) {
+  const input = event.target
+  const file = input?.files?.[0]
+
+  if (!file) {
+    return
+  }
+
+  try {
+    const text = await file.text()
+    const result = importTabsFromJsonText(text)
+    tabs.value = getTabs()
+
+    if (result.errors.length) {
+      importState.status = result.added ? 'warning' : 'error'
+      importState.message = result.added
+        ? `${result.added} tablature(s) importee(s) avec des avertissements.`
+        : 'Import impossible: certaines tablatures sont invalides.'
+      importState.errors = result.errors
+    } else {
+      importState.status = 'success'
+      importState.message = `${result.added} tablature(s) importee(s) avec succes.`
+      importState.errors = []
+    }
+  } catch {
+    importState.status = 'error'
+    importState.message = "Erreur pendant la lecture du fichier."
+    importState.errors = []
+  } finally {
+    input.value = ''
+  }
+}
 </script>
 
 <template>
@@ -12,6 +51,39 @@ const tabs = getTabs()
       <p class="max-w-2xl text-base-content/70">
         Selection locale pour commencer rapidement. Clique sur une tablature pour ouvrir le lecteur.
       </p>
+    </div>
+
+    <div class="card bg-base-200 shadow-sm">
+      <div class="card-body space-y-3">
+        <div>
+          <h2 class="card-title">Importer des tablatures (JSON)</h2>
+          <p class="text-sm text-base-content/70">
+            Importe un objet ou un tableau d'objets respectant le format JSON du projet.
+          </p>
+        </div>
+        <input
+          class="file-input file-input-bordered w-full max-w-lg"
+          type="file"
+          accept=".json,application/json"
+          @change="handleImport"
+        />
+
+        <div v-if="importState.status !== 'idle'" class="space-y-2">
+          <div
+            class="alert"
+            :class="{
+              'alert-success': importState.status === 'success',
+              'alert-warning': importState.status === 'warning',
+              'alert-error': importState.status === 'error',
+            }"
+          >
+            <span>{{ importState.message }}</span>
+          </div>
+          <ul v-if="importState.errors.length" class="list-disc pl-4 text-sm text-base-content/70">
+            <li v-for="error in importState.errors" :key="error">{{ error }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="grid gap-6 md:grid-cols-2">
