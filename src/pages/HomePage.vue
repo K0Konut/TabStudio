@@ -8,6 +8,8 @@ const totalTabs = tabs.length
 const instruments = computed(() => new Set(tabs.map((tab) => tab.instrument)).size)
 const difficulties = computed(() => new Set(tabs.map((tab) => tab.difficulty)).size)
 const featuredTab = tabs[0]
+const quickAccessTabs = tabs.slice(0, 3)
+const spotlightTabs = tabs.slice(0, 4)
 </script>
 
 <template>
@@ -76,6 +78,68 @@ const featuredTab = tabs[0]
           </p>
           <div class="card-actions justify-end">
             <RouterLink class="btn btn-outline" to="/library">Importer</RouterLink>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="card bg-base-200 shadow-sm">
+        <div class="card-body">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h2 class="card-title">Acces rapide</h2>
+              <p class="text-sm text-base-content/70">
+                Ouvre une tablature en un clic pour tester le lecteur.
+              </p>
+            </div>
+            <RouterLink class="btn btn-ghost btn-sm" to="/library">Tout voir</RouterLink>
+          </div>
+
+          <div class="grid gap-3 sm:grid-cols-3">
+            <RouterLink
+              v-for="tab in quickAccessTabs"
+              :key="tab.id"
+              class="rounded-box border border-base-300 bg-base-100 p-3 transition hover:border-primary"
+              :to="{ name: 'reader', params: { id: tab.id } }"
+            >
+              <p class="text-sm font-semibold">{{ tab.title }}</p>
+              <p class="text-xs text-base-content/60">{{ tab.artist }}</p>
+              <span class="badge badge-outline badge-sm mt-2">{{ tab.instrument }}</span>
+            </RouterLink>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-200 shadow-sm">
+        <div class="card-body">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h2 class="card-title">Selection du moment</h2>
+              <p class="text-sm text-base-content/70">
+                Quelques tablatures proposees pour varier les instruments et niveaux.
+              </p>
+            </div>
+            <RouterLink class="btn btn-ghost btn-sm" to="/library">Explorer</RouterLink>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <article v-for="tab in spotlightTabs" :key="tab.id" class="rounded-box border border-base-300 bg-base-100 p-4">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <p class="text-sm font-semibold">{{ tab.title }}</p>
+                  <p class="text-xs text-base-content/60">{{ tab.artist }}</p>
+                </div>
+                <span class="badge badge-outline badge-sm">{{ tab.difficulty }}</span>
+              </div>
+              <p class="mt-2 text-xs text-base-content/70">{{ tab.instrument }} · {{ tab.tuning }}</p>
+              <RouterLink
+                class="btn btn-xs btn-primary mt-3"
+                :to="{ name: 'reader', params: { id: tab.id } }"
+              >
+                Ouvrir
+              </RouterLink>
+            </article>
           </div>
         </div>
       </div>
