@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import AboutPage from '../pages/AboutPage.vue'
+import HomePage from '../pages/HomePage.vue'
 import LibraryPage from '../pages/LibraryPage.vue'
 import ReaderPage from '../pages/ReaderPage.vue'
 
@@ -8,6 +10,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: HomePage,
+    },
+    {
+      path: '/library',
       name: 'library',
       component: LibraryPage,
     },
@@ -16,6 +23,11 @@ const router = createRouter({
       name: 'reader',
       component: ReaderPage,
       props: true,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutPage,
     },
     {
       path: '/:pathMatch(.*)*',

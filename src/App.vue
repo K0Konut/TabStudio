@@ -10,7 +10,9 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink class="btn btn-ghost text-xl" to="/">TabStudio</RouterLink>
         </div>
         <div class="flex items-center gap-2">
-          <RouterLink class="btn btn-ghost" to="/">Bibliotheque</RouterLink>
+          <RouterLink class="btn btn-ghost" to="/">Accueil</RouterLink>
+          <RouterLink class="btn btn-ghost" to="/library">Bibliotheque</RouterLink>
+          <RouterLink class="btn btn-ghost" to="/about">A propos</RouterLink>
         </div>
       </div>
     </div>

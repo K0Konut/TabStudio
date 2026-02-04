@@ -24,7 +24,7 @@ watch(
         <h1 class="text-3xl font-semibold">{{ tab ? tab.title : 'Tablature introuvable' }}</h1>
         <p v-if="tab" class="text-sm text-base-content/70">{{ tab.artist }} · {{ tab.instrument }}</p>
       </div>
-      <RouterLink class="btn btn-ghost" to="/">Retour a la bibliotheque</RouterLink>
+      <RouterLink class="btn btn-ghost" to="/library">Retour a la bibliotheque</RouterLink>
     </div>
 
     <div v-if="!tab" class="alert alert-warning">
