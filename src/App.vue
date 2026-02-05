@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <div class="navbar bg-base-200">
       <div class="mx-auto flex w-full max-w-5xl items-center px-4">
         <div class="flex flex-1 items-center gap-2">
-          <div class="dropdown">
+          <div class="dropdown dropdown-bottom">
             <button
               class="btn btn-ghost lg:hidden"
               type="button"
@@ -26,7 +26,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </button>
             <ul
               tabindex="0"
-              class="menu dropdown-content mt-3 w-52 rounded-box border border-base-300 bg-base-100 p-2 shadow"
+              class="menu dropdown-content z-50 mt-3 w-52 rounded-box border border-base-300 bg-base-100 p-2 shadow"
             >
               <li><RouterLink to="/">Accueil</RouterLink></li>
               <li><RouterLink to="/library">Bibliotheque</RouterLink></li>
