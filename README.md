@@ -1,5 +1,22 @@
 # TabStudio
 
+## Demarrage rapide
+```bash
+npm install
+npm run dev
+```
+
+Scripts utiles:
+- `npm run build`
+- `npm run preview`
+- `npm run lint`
+
+## Routes principales
+- `/` Accueil
+- `/library` Bibliotheque
+- `/reader/:id` Lecteur
+- `/about` A propos
+
 ## Import de tablatures (JSON)
 Le lecteur accepte un objet JSON unique ou un tableau d'objets. Chaque tablature doit respecter ce schema :
 

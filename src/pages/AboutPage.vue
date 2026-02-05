@@ -20,8 +20,8 @@ import { RouterLink } from 'vue-router'
           <h2 class="card-title">Fonctionnalites MVP</h2>
           <ul class="list-disc space-y-2 pl-4 text-sm text-base-content/70">
             <li>Bibliotheque locale avec recherche et filtres simples.</li>
-            <li>Lecteur monospace avec zoom et informations d'accordage.</li>
-            <li>Import JSON pour ajouter des tablatures.</li>
+            <li>Lecteur monospace avec zoom, autoscroll et informations d'accordage.</li>
+            <li>Import JSON pour ajouter des tablatures en local.</li>
           </ul>
         </div>
       </div>
@@ -44,7 +44,6 @@ import { RouterLink } from 'vue-router'
         <h2 class="card-title">Prochaines evolutions</h2>
         <div class="flex flex-wrap gap-2 text-sm">
           <span class="badge badge-outline">Favoris</span>
-          <span class="badge badge-outline">Autoscroll</span>
           <span class="badge badge-outline">Transpose</span>
           <span class="badge badge-outline">Sync multi-appareils</span>
         </div>
