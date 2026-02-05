@@ -28,17 +28,23 @@ import { RouterLink, RouterView } from 'vue-router'
               tabindex="0"
               class="menu dropdown-content z-50 mt-3 w-52 rounded-box border border-base-300 bg-base-100 p-2 shadow"
             >
-              <li><RouterLink to="/">Accueil</RouterLink></li>
-              <li><RouterLink to="/library">Bibliotheque</RouterLink></li>
-              <li><RouterLink to="/about">A propos</RouterLink></li>
+              <li><RouterLink to="/" active-class="active">Accueil</RouterLink></li>
+              <li><RouterLink to="/library" active-class="active">Bibliotheque</RouterLink></li>
+              <li><RouterLink to="/about" active-class="active">A propos</RouterLink></li>
             </ul>
           </div>
-          <RouterLink class="btn btn-ghost text-xl" to="/">TabStudio</RouterLink>
+          <RouterLink class="btn btn-ghost text-xl" to="/" active-class="btn-active">
+            TabStudio
+          </RouterLink>
         </div>
         <div class="hidden items-center gap-2 lg:flex">
-          <RouterLink class="btn btn-ghost" to="/">Accueil</RouterLink>
-          <RouterLink class="btn btn-ghost" to="/library">Bibliotheque</RouterLink>
-          <RouterLink class="btn btn-ghost" to="/about">A propos</RouterLink>
+          <RouterLink class="btn btn-ghost" to="/" active-class="btn-active">Accueil</RouterLink>
+          <RouterLink class="btn btn-ghost" to="/library" active-class="btn-active">
+            Bibliotheque
+          </RouterLink>
+          <RouterLink class="btn btn-ghost" to="/about" active-class="btn-active">
+            A propos
+          </RouterLink>
         </div>
       </div>
     </div>
