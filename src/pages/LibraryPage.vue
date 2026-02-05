@@ -75,6 +75,13 @@ const emptyStateMessage = computed(() => {
   return 'Aucune tablature disponible.'
 })
 
+function resetFilters() {
+  filters.query = ''
+  filters.instrument = 'Tous'
+  filters.difficulty = 'Tous'
+  filters.tag = 'Tous'
+}
+
 function refreshTabs() {
   loadState.status = 'loading'
   loadState.message = ''
@@ -178,6 +185,15 @@ onMounted(() => {
           </p>
         </div>
 
+        <div class="flex flex-wrap items-center justify-between gap-3 text-sm text-base-content/70">
+          <p>
+            {{ filteredTabs.length }} / {{ tabs.length }} tablature<span v-if="tabs.length > 1">s</span>
+          </p>
+          <button v-if="isFiltering" class="btn btn-ghost btn-sm" type="button" @click="resetFilters">
+            Reinitialiser les filtres
+          </button>
+        </div>
+
         <div class="grid gap-4 md:grid-cols-4">
           <label class="form-control">
             <span class="label-text text-sm">Recherche</span>
@@ -237,7 +253,7 @@ onMounted(() => {
 
       <div v-else class="grid gap-6 md:grid-cols-2">
         <article v-for="tab in filteredTabs" :key="tab.id" class="card bg-base-200 shadow-sm">
-          <div class="card-body">
+          <div class="card-body h-full justify-between">
             <div class="flex items-start justify-between gap-4">
               <div>
                 <h2 class="card-title">{{ tab.title }}</h2>
