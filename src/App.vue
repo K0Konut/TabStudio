@@ -3,9 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="min-h-screen bg-base-100 text-base-content" data-theme="light">
-    <div class="navbar bg-base-200">
-      <div class="mx-auto flex w-full max-w-5xl items-center px-4">
+  <div class="min-h-screen text-base-content" data-theme="tabstudio">
+    <div class="navbar sticky top-0 z-20 border-b border-base-300/60 bg-base-200/70 backdrop-blur">
+      <div class="mx-auto flex w-full max-w-6xl items-center px-4">
         <div class="flex flex-1 items-center gap-2">
           <div class="dropdown dropdown-bottom">
             <button
@@ -33,8 +33,12 @@ import { RouterLink, RouterView } from 'vue-router'
               <li><RouterLink to="/about" active-class="active">A propos</RouterLink></li>
             </ul>
           </div>
-          <RouterLink class="btn btn-ghost text-xl" to="/" active-class="btn-active">
-            TabStudio
+          <RouterLink class="btn btn-ghost gap-3 text-xl tracking-tight" to="/" active-class="btn-active">
+            <span class="tab-logo">TS</span>
+            <span class="flex flex-col text-left leading-tight">
+              <span>TabStudio</span>
+              <span class="text-xs uppercase tracking-[0.3em] text-base-content/60">Night Reader</span>
+            </span>
           </RouterLink>
         </div>
         <div class="hidden items-center gap-2 lg:flex">
@@ -49,7 +53,7 @@ import { RouterLink, RouterView } from 'vue-router'
       </div>
     </div>
 
-    <main class="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <main class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
       <RouterView />
     </main>
   </div>

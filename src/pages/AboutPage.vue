@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 <template>
   <section class="space-y-8">
     <div class="space-y-2">
-      <p class="text-sm uppercase tracking-widest text-base-content/60">A propos</p>
+      <p class="text-xs uppercase tracking-[0.3em] text-base-content/60">A propos</p>
       <h1 class="text-3xl font-semibold">Pourquoi TabStudio ?</h1>
       <p class="max-w-2xl text-base-content/70">
         TabStudio est un lecteur de tablatures concu pour une utilisation locale : rapide, lisible,
@@ -15,7 +15,7 @@ import { RouterLink } from 'vue-router'
     </div>
 
     <div class="grid gap-6 md:grid-cols-2">
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card tab-card">
         <div class="card-body">
           <h2 class="card-title">Fonctionnalites MVP</h2>
           <ul class="list-disc space-y-2 pl-4 text-sm text-base-content/70">
@@ -25,7 +25,7 @@ import { RouterLink } from 'vue-router'
           </ul>
         </div>
       </div>
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card tab-card">
         <div class="card-body">
           <h2 class="card-title">Format de donnees</h2>
           <p class="text-sm text-base-content/70">
@@ -39,7 +39,7 @@ import { RouterLink } from 'vue-router'
       </div>
     </div>
 
-    <div class="card bg-base-200 shadow-sm">
+    <div class="card tab-card">
       <div class="card-body">
         <h2 class="card-title">Prochaines evolutions</h2>
         <div class="flex flex-wrap gap-2 text-sm">
@@ -49,7 +49,9 @@ import { RouterLink } from 'vue-router'
           <span class="badge badge-outline">Sync multi-appareils</span>
         </div>
         <div class="card-actions justify-end">
-          <RouterLink class="btn btn-primary" to="/library">Ouvrir la bibliotheque</RouterLink>
+          <RouterLink class="btn btn-primary shadow-lg shadow-primary/20" to="/library">
+            Ouvrir la bibliotheque
+          </RouterLink>
         </div>
       </div>
     </div>
