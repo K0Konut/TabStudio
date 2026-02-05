@@ -14,30 +14,34 @@ const spotlightTabs = tabs.slice(0, 4)
 
 <template>
   <section class="space-y-10">
-    <div class="card bg-base-200 shadow-sm">
-      <div class="card-body gap-6">
-        <div class="space-y-3">
-          <p class="text-sm uppercase tracking-widest text-base-content/60">Accueil</p>
-          <h1 class="text-4xl font-semibold">TabStudio, lecteur de tablatures simple et rapide.</h1>
+    <div class="card tab-surface">
+      <div class="card-body gap-8">
+        <div class="space-y-4">
+          <p class="text-xs uppercase tracking-[0.3em] text-base-content/60">Accueil</p>
+          <h1 class="text-4xl font-semibold leading-tight sm:text-5xl">
+            TabStudio, le lecteur de tablatures nocturne et fluide.
+          </h1>
           <p class="max-w-2xl text-base-content/70">
-            Centralise tes tablatures locales, filtre par instrument, et ouvre un lecteur lisible pour
-            jouer sans friction.
+            Centralise tes tablatures locales, filtre par instrument et ouvre un lecteur ultra lisible,
+            sans friction.
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <RouterLink class="btn btn-primary" to="/library">Voir la bibliotheque</RouterLink>
+          <RouterLink class="btn btn-primary shadow-lg shadow-primary/20" to="/library">
+            Voir la bibliotheque
+          </RouterLink>
           <RouterLink class="btn btn-ghost" to="/about">En savoir plus</RouterLink>
         </div>
         <div class="grid gap-4 sm:grid-cols-3">
-          <div class="rounded-box border border-base-300 bg-base-100 p-4">
+          <div class="rounded-box tab-card p-4 transition hover:-translate-y-0.5 hover:border-primary/50">
             <p class="text-sm text-base-content/60">Tabs disponibles</p>
             <p class="text-2xl font-semibold">{{ totalTabs }}</p>
           </div>
-          <div class="rounded-box border border-base-300 bg-base-100 p-4">
+          <div class="rounded-box tab-card p-4 transition hover:-translate-y-0.5 hover:border-primary/50">
             <p class="text-sm text-base-content/60">Instruments</p>
             <p class="text-2xl font-semibold">{{ instruments }}</p>
           </div>
-          <div class="rounded-box border border-base-300 bg-base-100 p-4">
+          <div class="rounded-box tab-card p-4 transition hover:-translate-y-0.5 hover:border-primary/50">
             <p class="text-sm text-base-content/60">Difficultes</p>
             <p class="text-2xl font-semibold">{{ difficulties }}</p>
           </div>
@@ -46,7 +50,7 @@ const spotlightTabs = tabs.slice(0, 4)
     </div>
 
     <div class="grid gap-6 lg:grid-cols-3">
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card tab-card transition hover:-translate-y-0.5 hover:border-primary/40">
         <div class="card-body">
           <h2 class="card-title">Recherche rapide</h2>
           <p class="text-sm text-base-content/70">
@@ -57,7 +61,7 @@ const spotlightTabs = tabs.slice(0, 4)
           </div>
         </div>
       </div>
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card tab-card transition hover:-translate-y-0.5 hover:border-primary/40">
         <div class="card-body">
           <h2 class="card-title">Lecteur confortable</h2>
           <p class="text-sm text-base-content/70">
@@ -70,7 +74,7 @@ const spotlightTabs = tabs.slice(0, 4)
           </div>
         </div>
       </div>
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card tab-card transition hover:-translate-y-0.5 hover:border-primary/40">
         <div class="card-body">
           <h2 class="card-title">Import local</h2>
           <p class="text-sm text-base-content/70">
@@ -84,7 +88,7 @@ const spotlightTabs = tabs.slice(0, 4)
     </div>
 
     <div class="grid gap-6 lg:grid-cols-2">
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card tab-card">
         <div class="card-body">
           <div class="flex items-start justify-between gap-4">
             <div>
@@ -100,7 +104,7 @@ const spotlightTabs = tabs.slice(0, 4)
             <RouterLink
               v-for="tab in quickAccessTabs"
               :key="tab.id"
-              class="rounded-box border border-base-300 bg-base-100 p-3 transition hover:border-primary"
+              class="rounded-box tab-card p-3 transition hover:-translate-y-0.5 hover:border-primary/60"
               :to="{ name: 'reader', params: { id: tab.id } }"
             >
               <p class="text-sm font-semibold">{{ tab.title }}</p>
@@ -111,7 +115,7 @@ const spotlightTabs = tabs.slice(0, 4)
         </div>
       </div>
 
-      <div class="card bg-base-200 shadow-sm">
+      <div class="card tab-card">
         <div class="card-body">
           <div class="flex items-start justify-between gap-4">
             <div>
@@ -124,7 +128,11 @@ const spotlightTabs = tabs.slice(0, 4)
           </div>
 
           <div class="grid gap-4 sm:grid-cols-2">
-            <article v-for="tab in spotlightTabs" :key="tab.id" class="rounded-box border border-base-300 bg-base-100 p-4">
+            <article
+              v-for="tab in spotlightTabs"
+              :key="tab.id"
+              class="rounded-box tab-card p-4 transition hover:-translate-y-0.5 hover:border-primary/60"
+            >
               <div class="flex items-start justify-between gap-3">
                 <div>
                   <p class="text-sm font-semibold">{{ tab.title }}</p>

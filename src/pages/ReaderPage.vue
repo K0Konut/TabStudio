@@ -7,6 +7,7 @@ const route = useRoute()
 const zoom = ref(16)
 const isAutoScrollEnabled = ref(false)
 const isAutoScrollRunning = ref(false)
+const isFocusMode = ref(false)
 const autoScrollSpeed = ref(24)
 const scrollContainer = ref(null)
 let animationFrameId = null
@@ -18,6 +19,7 @@ watch(
   () => {
     zoom.value = 16
     stopAutoScroll()
+    isFocusMode.value = false
   }
 )
 
@@ -66,6 +68,10 @@ function toggleAutoScroll() {
   }
 }
 
+function toggleFocusMode() {
+  isFocusMode.value = !isFocusMode.value
+}
+
 watch(isAutoScrollEnabled, (enabled) => {
   if (!enabled) {
     stopAutoScroll()
@@ -81,7 +87,7 @@ onBeforeUnmount(() => {
   <section class="space-y-6">
     <div class="flex flex-wrap items-center justify-between gap-4">
       <div>
-        <p class="text-sm uppercase tracking-widest text-base-content/60">Lecteur</p>
+        <p class="text-xs uppercase tracking-[0.3em] text-base-content/60">Lecteur</p>
         <h1 class="text-3xl font-semibold">{{ tab ? tab.title : 'Tablature introuvable' }}</h1>
         <p v-if="tab" class="text-sm text-base-content/70">{{ tab.artist }} · {{ tab.instrument }}</p>
       </div>
@@ -108,7 +114,7 @@ onBeforeUnmount(() => {
           <span class="text-sm text-base-content/70">{{ zoom }}px</span>
         </div>
 
-        <div class="flex flex-wrap items-center gap-3 rounded-box border border-base-300 bg-base-100 px-3 py-2">
+        <div class="flex flex-wrap items-center gap-3 rounded-box tab-card px-3 py-2">
           <label class="flex items-center gap-2 text-sm font-medium">
             <input v-model="isAutoScrollEnabled" class="toggle toggle-primary" type="checkbox" />
             Auto-scroll
@@ -144,11 +150,45 @@ onBeforeUnmount(() => {
           <span class="badge badge-ghost">{{ tab.tuning }}</span>
           <span class="badge badge-ghost">Capo: {{ tab.capo }}</span>
         </div>
+
+        <button
+          class="btn btn-outline btn-sm"
+          type="button"
+          :aria-pressed="isFocusMode"
+          @click="toggleFocusMode"
+        >
+          {{ isFocusMode ? 'Quitter focus' : 'Mode focus' }}
+        </button>
       </div>
 
-      <div ref="scrollContainer" class="max-h-[60vh] overflow-y-auto rounded-box border border-base-300 bg-base-200 p-4">
+      <div
+        v-if="isFocusMode"
+        class="fixed inset-0 z-40 bg-base-100/70 backdrop-blur"
+        role="button"
+        aria-label="Quitter le mode focus"
+        tabindex="0"
+        @click="toggleFocusMode"
+        @keydown.enter.prevent="toggleFocusMode"
+        @keydown.space.prevent="toggleFocusMode"
+      ></div>
+
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-base-content/60">
+          <span class="inline-flex h-2 w-2 rounded-full bg-primary"></span>
+          Console
+        </div>
+        <div class="text-xs text-base-content/60">Lecture optimisee pour les passages longs</div>
+      </div>
+
+      <div
+        ref="scrollContainer"
+        :class="[
+          'overflow-y-auto rounded-box tab-reader p-4 transition-all',
+          isFocusMode ? 'fixed inset-6 z-50 max-h-none h-[calc(100vh-3rem)]' : 'max-h-[60vh]',
+        ]"
+      >
         <pre
-          class="overflow-x-auto whitespace-pre font-mono leading-relaxed"
+          class="tab-mono overflow-x-auto whitespace-pre leading-relaxed"
           :style="{ fontSize: `${zoom}px` }"
         >{{ tab.content }}</pre>
       </div>
